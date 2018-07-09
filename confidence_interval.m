@@ -1,15 +1,17 @@
-means = csvread('end2end_delay_mean-1.csv', 1, 0);
-n=15; % Sample size
-pm=12;  ps=10;  % mean(pm) and standard deviation(ps)
-alpha=0.05; % trust level (alpha)
-num_exp=100;
-figure;  hold on;
+values = csvread('end2end_delay_mean-1.csv', 1, 0);
+n = length(values); % Sample size
+pm = mean(values);  % mean
+ps = var(values);   % variance
+sem=ps/sqrt(n);     % standard deviation
+alpha = 0.05;       % trust level (alpha)
+figure; hold on;
 counter=0;
-for i=1:num_exp;
-    x=pm+ps*randn(n,1);
-    mx=mean(x);
-    zcr=norminv(1-alpha/2,0,1);
-    sem=ps/sqrt(n);
+%for i=1:num_exp;
+for i = values;
+    %x=pm+ps*randn(n,1);
+    %mx=mean(x);
+    %zcr=norminv(1-alpha/2,0,1);
+    %sem=ps/sqrt(n);
     me=zcr*sem;
     CI1= mx-me;
     CI2= mx+me;
